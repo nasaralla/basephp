@@ -45,6 +45,10 @@ final class Core_Engine
 
 		$class = self::loadClass($class_name);
 	
+        if( class_exists($class) ) {
+            return new $class();
+        }
+        
 		return new $class();
 	}
 	
@@ -54,7 +58,11 @@ final class Core_Engine
 
 		$class = self::loadClass($class_name);
 	
-		return new $class();
+        if( class_exists($class) ) {
+            return new $class();
+        }
+        
+        return FALSE;
 	}
 	
 	public static function getBlock()
@@ -63,15 +71,17 @@ final class Core_Engine
 
 		$class = self::loadClass($class_name);
 	
+        if( class_exists($class) ) {
+            return new $class();
+        }
+        
 		return new $class();
 	}
 	
 	public static function run()
 	{
 		if( isset($_SERVER['PATH_INFO']) ) {
-			$path = $_SERVER['PATH_INFO'];
-			
-						echo $path; die();
+			$path = $_SERVER['PATH_INFO'];		
 			
 			$parts = explode("/",$path);		
 			
