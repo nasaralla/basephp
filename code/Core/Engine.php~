@@ -68,7 +68,33 @@ final class Core_Engine
 	
 	public static function run()
 	{
-		print_r($_SERVER['path_info']);
+		if( isset($_SERVER['PATH_INFO']) ) {
+			$path = $_SERVER['PATH_INFO'];
+			
+						echo $path; die();
+			
+			$parts = explode("/",$path);		
+			
+			if( isset($parts[1]) && isset($parts[2]) && isset($parts[3]) ) {			
+			
+				$action = $parts[1].'/'.$parts[2].'Controller';
+				
+				$controller = self::getController($action);	
+				
+				if( $controller ) {
+                    $method = $parts[3].'Action';
+					$controller->$method();
+				} else {
+					echo "404";
+				}
+				
+			} else {
+				echo "404";
+			}			
+		} else {
+			//load the index page
+			echo "Home";
+		}
 	}
 }
 
