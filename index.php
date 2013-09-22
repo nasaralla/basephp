@@ -10,6 +10,8 @@ Core_Engine::init('Test');
 
 //echo get_class(Core_Engine::getModel('Module/Model'));
 
-echo Core_Engine::run();
+$db = Core_Engine::getDb();
+
+print_r($db->fetchItem($db->makeQuery("show processlist;")));
 
 ?>
