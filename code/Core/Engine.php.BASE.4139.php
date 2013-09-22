@@ -45,10 +45,6 @@ final class Core_Engine
 
 		$class = self::loadClass($class_name);
 	
-        if( class_exists($class) ) {
-            return new $class();
-        }
-        
 		return new $class();
 	}
 	
@@ -58,11 +54,7 @@ final class Core_Engine
 
 		$class = self::loadClass($class_name);
 	
-        if( class_exists($class) ) {
-            return new $class();
-        }
-        
-        return FALSE;
+		return new $class();
 	}
 	
 	public static function getBlock()
@@ -71,40 +63,12 @@ final class Core_Engine
 
 		$class = self::loadClass($class_name);
 	
-        if( class_exists($class) ) {
-            return new $class();
-        }
-        
 		return new $class();
 	}
 	
 	public static function run()
 	{
-		if( isset($_SERVER['PATH_INFO']) ) {
-			$path = $_SERVER['PATH_INFO'];		
-			
-			$parts = explode("/",$path);		
-			
-			if( isset($parts[1]) && isset($parts[2]) && isset($parts[3]) ) {			
-			
-				$action = $parts[1].'/'.$parts[2].'Controller';
-				
-				$controller = self::getController($action);	
-				
-				if( $controller ) {
-                    $method = $parts[3].'Action';
-					$controller->$method();
-				} else {
-					echo "404";
-				}
-				
-			} else {
-				echo "404";
-			}			
-		} else {
-			//load the index page
-			echo "Home";
-		}
+		print_r($_SERVER['PATH_INFO']);
 	}
 }
 
